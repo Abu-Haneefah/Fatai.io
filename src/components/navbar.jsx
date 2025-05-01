@@ -160,26 +160,28 @@ const Navbar = ()=> {
       </button>
       
       {/* Menu List */}
-      {open &&[
+      {open && (
+  <motion.div
+    variants={listVariants}
+    initial="closed"
+    animate={open ? "opened" : "closed"}
+    exit="closed"
+    className="absolute top-0 left-0 w-screen h-screen bg-black text-white flex flex-col items-center justify-center gap-8 text-2xl z-40"
+  >
+    {links.map((link) => (
       <motion.div
-       variants={listVariants}
-       initial="closed"
-      animate={open ? "opened" : "closed"}
-      exit="closed"
-       className="absolute top-0 left-0 w-screen h-screen bg-black text-white flex flex-col items-center justify-center gap-8 text-2xl z-40"
-       >
-      {links.map((link) => (
-        <motion.div 
         variants={listItemVariants}
-        className="" key={link.url}
-        >
+        className=""
+        key={link.url}
+      >
         <Link href={link.url}>
           {link.title}
         </Link>
-        </motion.div>
-      ))}
       </motion.div>
-      ]}
+    ))}
+  </motion.div>
+)}
+
 
      </div>
       </div>

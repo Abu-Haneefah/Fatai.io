@@ -39,7 +39,7 @@ function Contact() {
             setSuccess(false);
           }, 3000); // Hide after 3 seconds
         },
-        (error) => {
+        () => {
           setError(true);
           setLoading(false);
           setTimeout(() => setError(false), 4000); // auto-hide error after 4s

@@ -36,10 +36,10 @@ const ChatBot = () => {
 
       const data = await res.json();
       console.log("Received response:", data.response); // Debug log
-      setMessages((prev) => [...newMessages, { role: 'assistant', content: data.response }]);
+      setMessages(() => [...newMessages, { role: 'assistant', content: data.response }]);
     } catch (err) {
       console.error('Error:', err); // Debug log
-      setMessages((prev) => [
+      setMessages(() => [
         ...newMessages,
         { role: 'assistant', content: 'Oops! Something went wrong.' },
       ]);
