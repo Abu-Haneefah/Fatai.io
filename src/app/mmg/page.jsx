@@ -67,13 +67,13 @@ const projects = {
     },
     {
       name: "Payment Gateway Dashboard 💳",
-      image: "",
+      image: "/gateway.png",
       link: "",
       description: ["✅ Payment dashboard interface completed"],
     },
     {
       name: "Shanono Completed Tasks",
-      image: "",
+      image: "/shashot.png",
       link: "",
       description: [
         "🛠️ Resolved login issue in production",
@@ -86,7 +86,7 @@ const projects = {
   ongoing: [
     {
       name: "New Shanono UI 🔁",
-      image: "",
+      image: "/newdash.png",
       link: "",
       description: [
         "🧪 Redesign of sign-up page in progress",
