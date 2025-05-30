@@ -179,9 +179,10 @@ export default function Home() {
         initial="hidden"
         animate="visible"
       >
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-          <AnimatedHeading text="My Project Contributions at MMG" />
-        </h1>
+        <AnimatedHeading
+          text="My Project Contributions at MMG"
+          colorClass="text-gray-800 text-4xl md:text-5xl font-bold mb-4"
+        />
         <motion.p
           className="text-base max-w-2xl mx-auto text-gray-600"
           variants={introTextItemVariants}
