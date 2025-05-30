@@ -1,186 +1,243 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+
+const introTextContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const introTextItemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+    },
+  },
+};
+
+const getCharacterAnimationProps = (index) => ({
+  initial: { opacity: 1 },
+  animate: { opacity: 0.3 },
+  transition: {
+    duration: 3,
+    repeat: Infinity,
+    delay: index * 0.1,
+  },
+});
 
 const projects = {
   live: [
     {
-      name: "Shanonobank",
+      name: "Shanonobank ✅",
       link: "https://www.shanonobank.com",
       image: "/shashot.png",
       description: [
-        "Fixed frontend bugs on homepage (social links, join button, typos)",
-        "Fixed dashboard quick transfer input",
-        "OTP verification on sign-up",
-        ".env fix for staging",
-        "404 page responsiveness fix",
-        "Button responsiveness fix",
-        "Hotfix for button on small screens",
-        "Testimonials and FAQ section",
-        "Investment card feature",
-        "Email subscription",
-        "Beneficiaries section",
-        "......................",
+        "💳 Investment card feature",
+        "👥 Beneficiaries",
+        "📧 Email subscription",
+        "🌟 Testimonials section",
+        "❓ FAQ update",
       ],
     },
     {
-      name: "Finerium",
+      name: "Finerium 🛍️",
       link: "https://thefinerium.com",
       image: "/finshot.png",
-      description: ["Fixed partners section"],
+      description: ["🛠️ Fixed partners section"],
     },
   ],
   completed: [
     {
-      name: "Loop Freight Landing Page",
-      image: "/loopshot.png",
+      name: "Loop Freight Landing Page 🚚",
       link: "https://loop-frieght-e3caqcu4b-abu-haneefah-s-projects.vercel.app/",
-      description: ["Responsive landing page for mobile and desktop"],
+      image: "/loopshot.png",
+      description: ["📱 Responsive landing page for mobile and desktop"],
     },
     {
-      name: "Payment Gateway Dashboard",
-      image: "/paymentgateway.png",
-      description: ["Payment dashboard interface completed"],
+      name: "Payment Gateway Dashboard 💳",
+      image: "",
+      link: "",
+      description: ["✅ Payment dashboard interface completed"],
     },
     {
-      name: "Login Issue Fix",
-      description: ["Resolved login issue in production"],
-    },
-    {
-      name: "Delimiter",
-      description: ["Component for formatting"],
+      name: "Shanono Completed Tasks",
+      image: "",
+      link: "",
+      description: [
+        "🛠️ Resolved login issue in production",
+        "🛠️ Delimiter and Amount Formatting",
+        "📊 Refactored monthly statement of account",
+      ],
+      isGrouped: true,
     },
   ],
   ongoing: [
     {
-      name: "New Shanono Sign-Up UI",
-      description: ["In progress redesign of sign-up page"],
-    },
-    {
-      name: "New Shanono Dashboard",
-      description: ["Ongoing dashboard revamp"],
+      name: "New Shanono UI 🔁",
+      image: "",
+      link: "",
+      description: [
+        "🧪 Redesign of sign-up page in progress",
+        "📈 Dashboard revamp underway",
+      ],
+      isGrouped: true,
     },
   ],
 };
 
+const AnimatedHeading = ({ text, colorClass }) => (
+  <h2
+    className={`text-3xl md:text-4xl font-semibold mb-8 text-center ${colorClass}`}
+  >
+    <div className="inline-block">
+      {text.split("").map((letter, index) => (
+        <motion.span key={index} {...getCharacterAnimationProps(index)}>
+          {letter === " " ? "\u00A0" : letter}
+        </motion.span>
+      ))}
+    </div>
+  </h2>
+);
+
+const ProjectCard = ({ project, borderColor, accentColor }) => (
+  <motion.div
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.98 }}
+    className={`bg-white rounded-2xl shadow-lg overflow-hidden border ${borderColor} transition-all duration-300`}
+  >
+    {project.image && (
+      <div className="relative h-52 w-full">
+        <Image
+          src={project.image}
+          alt={project.name}
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+      </div>
+    )}
+    <div className="p-5">
+      <h3 className="text-xl font-bold text-gray-800 mb-2">
+        {project.link ? (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noreferrer"
+            className={`${accentColor} hover:underline`}
+          >
+            {project.name}
+          </a>
+        ) : (
+          project.name
+        )}
+      </h3>
+      <ul className="list-disc ml-5 mt-2 space-y-1 text-gray-700 text-sm">
+        {project.description.map((item, i) => (
+          <React.Fragment key={i}>
+            <motion.li
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+              className={
+                project.isGrouped
+                  ? "font-semibold text-purple-700"
+                  : `${accentColor}`
+              }
+            >
+              {item}
+            </motion.li>
+            {project.isGrouped && i < project.description.length - 1 && (
+              <li className="text-gray-400 ml-4">...</li>
+            )}
+          </React.Fragment>
+        ))}
+      </ul>
+    </div>
+  </motion.div>
+);
+
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white text-gray-900 font-sans">
-      <section className="p-8 bg-gradient-to-b from-[#0B0B0F] to-[#18181B] text-white text-center">
-        <h1 className="text-5xl font-extrabold mb-4 tracking-tight">
-          Hi, I’m Fatai
+    <main className="min-h-screen bg-white text-gray-900">
+      {/* Intro */}
+      <motion.section
+        className="p-10 text-center bg-white"
+        variants={introTextContainerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+          <AnimatedHeading text="My Project Contributions at MMG" />
         </h1>
-        <p className="text-lg max-w-2xl mx-auto leading-relaxed">
-          A passionate frontend developer crafting elegant, accessible, and
-          performant interfaces. Currently shaping digital experiences at
-          Miraton Matador Group.
-        </p>
-      </section>
+        <motion.p
+          className="text-base max-w-2xl mx-auto text-gray-600"
+          variants={introTextItemVariants}
+        >
+          A breakdown of my work at MMG — categorized into Live, Completed, and
+          Ongoing projects.
+        </motion.p>
+      </motion.section>
 
-      <section className="p-8">
-        <h2 className="text-3xl font-semibold mb-6 text-center text-blue-800">
-          Live Projects
-        </h2>
-        <div className="grid md:grid-cols-2 gap-8">
+      {/* Live Projects */}
+      <section className="px-6 py-10">
+        <AnimatedHeading text="Live Projects ✅" colorClass="text-indigo-600" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.live.map((project, i) => (
-            <div
+            <ProjectCard
               key={i}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
-            >
-              {project.image && (
-                <Image
-                  src={project.image}
-                  alt={project.name}
-                  width={400}
-                  height={200}
-                  className="rounded-t-xl object-cover h-48 w-full"
-                />
-              )}
-              <div className="p-5">
-                <h3 className="text-xl font-bold text-gray-800">
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-blue-700 hover:underline"
-                  >
-                    {project.name}
-                  </a>
-                </h3>
-                <ul className="list-disc ml-6 mt-3 text-sm text-gray-700">
-                  {project.description.map((item, idx) => (
-                    <li key={idx}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+              project={project}
+              borderColor="border-indigo-100"
+              accentColor="text-indigo-600"
+            />
           ))}
         </div>
       </section>
 
-      <section className="p-8 bg-gray-50">
-        <h2 className="text-3xl font-semibold mb-6 text-center text-green-700">
-          Completed Projects
-        </h2>
-        <div className="grid md:grid-cols-2 gap-8">
+      {/* Completed Projects */}
+      <section className="px-6 py-10 bg-gray-50">
+        <AnimatedHeading
+          text="Completed Projects ✅"
+          colorClass="text-green-600"
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.completed.map((project, i) => (
-            <div
+            <ProjectCard
               key={i}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
-            >
-              {project.image && (
-                <Image
-                  src={project.image}
-                  alt={project.name}
-                  width={400}
-                  height={200}
-                  className="rounded-t-xl object-cover h-48 w-full"
-                />
-              )}
-              <div className="p-5">
-                <h3 className="text-xl font-bold text-gray-800">
-                  {project.link ? (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-green-700 hover:underline"
-                    >
-                      {project.name}
-                    </a>
-                  ) : (
-                    project.name
-                  )}
-                </h3>
-                <ul className="list-disc ml-6 mt-3 text-sm text-gray-700">
-                  {project.description.map((item, idx) => (
-                    <li key={idx}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+              project={project}
+              borderColor="border-green-100"
+              accentColor="text-green-600"
+            />
           ))}
         </div>
       </section>
 
-      <section className="p-8">
-        <h2 className="text-3xl font-semibold mb-6 text-center text-purple-700">
-          Ongoing Projects
-        </h2>
-        <div className="grid md:grid-cols-2 gap-8">
+      {/* Ongoing Projects */}
+      <section className="px-6 py-10">
+        <AnimatedHeading
+          text="Ongoing Projects 🔁"
+          colorClass="text-purple-600"
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.ongoing.map((project, i) => (
-            <div
+            <ProjectCard
               key={i}
-              className="bg-white rounded-2xl shadow-lg p-5 hover:shadow-2xl transition-shadow duration-300"
-            >
-              <h3 className="text-xl font-bold text-gray-800 mb-2">
-                {project.name}
-              </h3>
-              <ul className="list-disc ml-6 text-sm text-gray-700">
-                {project.description.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            </div>
+              project={project}
+              borderColor="border-purple-100"
+              accentColor="text-purple-600"
+            />
           ))}
         </div>
       </section>
