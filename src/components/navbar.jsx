@@ -9,7 +9,9 @@ import { motion } from "framer-motion";
 const links = [
   { url: "/", title: "Home" },
   // { url: "/about", title: "About" },
-  { url: "/mmg", title: "MMG" },
+  // { url: "/mmg", title: "MMG" },
+  { url: "/9jacode", title: "9ja" },
+
   // { url: "/portfolio", title: "Portfolio" },
   { url: "/contact", title: "Contact" },
 ];
