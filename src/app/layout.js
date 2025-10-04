@@ -2,27 +2,22 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import TransitionProvider from "../components/transitionProvider";
 
-
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Fatai.io",
-  icons: "/favicon.ico", 
-  keywords: "portfolio, web developer, software engineer",
+  icons: "/favicon.ico",
+  keywords:
+    "portfolio, web developer, software engineer, front-end developer, back-end developer, full-stack developer, UI/UX designer, JavaScript, React, Next.js, Node.js, HTML, CSS, Tailwind CSS, TypeScript, Git, GitHub, programming, coding, web design, web development services",
   description: "A portfolio website for Fatai",
-  authors: [{ name: "Fatai" }], 
+  authors: [{ name: "Fatai" }],
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-     <TransitionProvider>
-     {children}
-     </TransitionProvider>
-         
-         
+        <TransitionProvider>{children}</TransitionProvider>
       </body>
     </html>
   );
