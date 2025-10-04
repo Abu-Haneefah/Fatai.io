@@ -8,13 +8,45 @@ const items = [
   {
     id: 1,
     color: "from-red-300 to-blue-300",
+    title: "Modern Dashboard",
+    desc: "A clean and responsive modern dashboard for analytics and business management. The design emphasizes clarity and simplicity while still delivering powerful data visualization and management features.",
+    img: "/shad-dashboard.PNG",
+    link: "https://modern-dashbaord.vercel.app/",
+  },
+  {
+    id: 2,
+    color: "from-red-300 to-blue-300",
+    title: "School Management System",
+    desc: "A sleek, responsive analytics dashboard focused on clarity and usability. It showcases charts, metrics, and data-driven widgets in a clean, modern interface. Designed to present business intelligence and insights in a compelling way.",
+    img: "/school_admin.PNG",
+    link: "https://school-management-dahboard-3n3wojjq9-abu-haneefah-s-projects.vercel.app/list/exams?_vercel_share=wkPlg9t0VBzzn5ZpYSd9JR1QChtMn52h",
+  },
+  {
+    id: 3,
+    color: "from-red-300 to-blue-300",
+    title: "E-commerce ui",
+    desc: "A modern e-commerce web application that demonstrates product browsing, product detail pages, shopping cart management, and a checkout UI. The app highlights frontend best practices with reusable components, responsive design, and scalable architecture.",
+    img: "/e-commerce2.PNG",
+    link: "https://e-commerce-4aecd45wt-abu-haneefah-s-projects.vercel.app",
+  },
+  {
+    id: 4,
+    color: "from-red-300 to-blue-300",
+    title: "Real Estate",
+    desc: "A modern real estate web application that demonstrates product browsing, product detail pages, shopping cart management, and a checkout UI. The app highlights frontend best practices with reusable components, responsive design, and scalable architecture.",
+    img: "/ecommerce4.PNG",
+    link: "https://real-estate-ten-gray.vercel.app",
+  },
+  {
+    id: 6,
+    color: "from-red-300 to-blue-300",
     title: "Bakery Wbesite",
     desc: "An interactive and visually appealing bakery website featuring smooth navigation and animations.",
     img: "/bakery.jpg",
     link: "https://abu-haneefah.github.io/Bakery__site/",
   },
   {
-    id: 2,
+    id: 7,
     color: "from-blue-300 to-violet-300",
     title: "Construction Website",
     desc: "A professional construction company website with a responsive design and modern UI.",
@@ -22,7 +54,7 @@ const items = [
     link: "https://abu-haneefah.github.io/consturuction_website/",
   },
   {
-    id: 3,
+    id: 8,
     color: "from-violet-300 to-purple-300",
     title: "Pizza Website",
     desc: "A fully responsive pizza ordering website with an intuitive design and animations.",
@@ -30,7 +62,7 @@ const items = [
     link: "https://abu-haneefah.github.io/pizza-Website/",
   },
   {
-    id: 4,
+    id: 9,
     color: "from-purple-300 to-red-300",
     title: "Watch Filter",
     desc: "A React-based watch filtering app that allows users to sort and filter watches dynamically.",
@@ -74,8 +106,14 @@ const PortfolioPage = () => {
                   <p className="w-80 md:w96 lg:w-[500px] lg:text-lg xl:w-[600px]">
                     {item.desc}
                   </p>
-                  <Link href={item.link} className="flex justify-end" target="_blank">
-                    <button className="p-2 text-sm md:p-2 md:text-md lg:p-4 lg:text-lg bg-white text-gray-600 font-semibold mb-12 rounded" >See Demo</button>
+                  <Link
+                    href={item.link}
+                    className="flex justify-end"
+                    target="_blank"
+                  >
+                    <button className="p-2 text-sm md:p-2 md:text-md lg:p-4 lg:text-lg bg-white text-gray-600 font-semibold mb-12 rounded">
+                      See Demo
+                    </button>
                   </Link>
                 </div>
               </div>
