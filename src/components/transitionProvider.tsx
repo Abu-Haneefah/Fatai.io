@@ -1,12 +1,24 @@
 "use client";
 
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./navbar";
-import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import React from "react";
 
-const TransitionProvider = ({ children }) => {
+interface TransitionProviderProps {
+  children: React.ReactNode;
+}
+
+const TransitionProvider = ({ children }: TransitionProviderProps) => {
   const pathName = usePathname();
+
+  // If inside /teach/physics or /teach/coding, we allow the slide deck to take over full screen cleanly
+  const isSlidePresentation =
+    pathName.startsWith("/teach/physics") || pathName.startsWith("/teach/coding");
+
+  if (isSlidePresentation) {
+    return <>{children}</>;
+  }
 
   return (
     <AnimatePresence mode="wait">
@@ -21,13 +33,13 @@ const TransitionProvider = ({ children }) => {
           transition={{ duration: 0.5, ease: "easeOut" }}
         />
         <motion.div
-          className="fixed m-auto top-0 bottom-0 left-0 right-0 text-white text-8xl cursor-default z-50 w-fit h-fit"
+          className="fixed m-auto top-0 bottom-0 left-0 right-0 text-white text-8xl cursor-default z-50 w-fit h-fit capitalize"
           initial={{ opacity: 1 }}
           animate={{ opacity: 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {pathName.substring(1)}
+          {pathName === "/" ? "Home" : pathName.substring(1).replace(/-/g, " ")}
         </motion.div>
         <motion.div
           className="h-screen w-screen fixed bg-black rounded-t-[100px] bottom-0 z-30"
